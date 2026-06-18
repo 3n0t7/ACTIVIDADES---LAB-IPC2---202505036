@@ -1,0 +1,135 @@
+@*
+    Archivo: Views/Estudiante/Listar.cshtml
+    Vista de listado de estudiantes — Ruta: GET /Estudiante/Listar
+    
+    Principio MVC aplicado: la Vista es una entidad PASIVA.
+    Solo itera sobre los datos que el Controlador le inyectó.
+    NO contiene lógica de negocio, SQL ni cálculos matemáticos.
+*@
+@model IEnumerable<ControlAcademicoMvc.Models.Estudiante>
+@{
+    ViewData["Title"] = "Listado de Estudiantes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">
+    <h1>&#128203; Listado de Estudiantes</h1>
+    <p class="page-subtitle">
+        Ruta activa: <code>/Estudiante/Listar</code> →
+        <strong>EstudianteController.Listar()</strong>
+    </p>
+</div>
+
+<div class="toolbar">
+    <button class="btn-primary" onclick="mostrarFormulario()">+ Registrar Nuevo Estudiante</button>
+    <span class="record-count">Total registros: <strong>@Model.Count()</strong></span>
+</div>
+
+<!-- Formulario de registro (oculto por defecto) -->
+<div id="form-registro" class="form-card" style="display:none;">
+    <h3>Registrar Nuevo Estudiante</h3>
+    <p class="form-note">
+        Este formulario envía una petición <code>POST /Estudiante/Registrar</code>
+        con el cuerpo en formato JSON. El controlador aplica validación perimetral
+        y retorna HTTP 201 Created o 400 Bad Request.
+    </p>
+    <div class="form-row">
+        <label>Carné:</label>
+        <input type="number" id="input-carne" placeholder="Ej: 202505099" />
+    </div>
+    <div class="form-row">
+        <label>Nombre Completo:</label>
+        <input type="text" id="input-nombre" placeholder="Ej: Juan García López" />
+    </div>
+    <div class="form-row">
+        <label>Promedio (0-100):</label>
+        <input type="number" id="input-promedio" step="0.1" min="0" max="100" placeholder="Ej: 85.5" />
+    </div>
+    <div class="form-actions">
+        <button class="btn-primary" onclick="registrarEstudiante()">Enviar POST</button>
+        <button class="btn-secondary" onclick="ocultarFormulario()">Cancelar</button>
+    </div>
+    <div id="api-response" class="api-response" style="display:none;"></div>
+</div>
+
+<!-- Tabla de estudiantes -->
+@if (!Model.Any())
+{
+    <div class="empty-state">
+        <p>No hay estudiantes registrados en el sistema.</p>
+    </div>
+}
+else
+{
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Carné</th>
+                <th>Nombre Completo</th>
+                <th>Promedio</th>
+                <th>Clasificación</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var estudiante in Model)
+            {
+                <tr>
+                    <td><code>@estudiante.Carne</code></td>
+                    <td>@estudiante.Nombre</td>
+                    <td>
+                        <span class="promedio-badge">@estudiante.Promedio.ToString("F1")</span>
+                    </td>
+                    <td>
+                        <span class="clasificacion @estudiante.ClasificacionAcademica.ToLower()">
+                            @estudiante.ClasificacionAcademica
+                        </span>
+                    </td>
+                    <td>
+                        <a href="/Estudiante/Historial/@estudiante.Carne" class="btn-link">Ver Historial</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<script>
+    function mostrarFormulario() {
+        document.getElementById('form-registro').style.display = 'block';
+    }
+    function ocultarFormulario() {
+        document.getElementById('form-registro').style.display = 'none';
+        document.getElementById('api-response').style.display = 'none';
+    }
+
+    async function registrarEstudiante() {
+        const payload = {
+            carne:    parseInt(document.getElementById('input-carne').value),
+            nombre:   document.getElementById('input-nombre').value,
+            promedio: parseFloat(document.getElementById('input-promedio').value)
+        };
+
+        try {
+            const response = await fetch('/Estudiante/Registrar', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            const data = await response.json();
+            const div  = document.getElementById('api-response');
+            div.style.display = 'block';
+
+            if (response.status === 201) {
+                div.className = 'api-response success';
+                div.innerHTML = `<strong>HTTP 201 Created</strong> — Estudiante registrado exitosamente. Recarga la página para verlo en la tabla.`;
+            } else {
+                div.className = 'api-response error';
+                div.innerHTML = `<strong>HTTP ${response.status}</strong> — ${data.mensaje}`;
+            }
+        } catch (err) {
+            console.error('Error al registrar:', err);
+        }
+    }
+</script>

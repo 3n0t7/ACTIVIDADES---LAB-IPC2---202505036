@@ -1,0 +1,77 @@
+@* 
+    Archivo: Views/Home/Index.cshtml
+    Vista principal de la aplicación — Ruta: GET /Home o GET /
+    Solo contiene lógica de presentación (prohibido: SQL, cálculos de negocio).
+*@
+@{
+    ViewData["Title"] = "Inicio";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="hero-section">
+    <div class="hero-badge">Arquitectura N-Tier + Patrón MVC</div>
+    <h1 class="hero-title">Sistema de Control Académico</h1>
+    <p class="hero-subtitle">
+        Implementado en <strong>ASP.NET Core MVC — .NET 8</strong><br/>
+        Aplicando separación de responsabilidades (SoC) y controladores delgados (Skinny Controllers)
+    </p>
+    <a href="/Estudiante/Listar" class="btn-primary">Ver Listado de Estudiantes</a>
+</div>
+
+<div class="info-grid">
+    <div class="info-card card-blue">
+        <div class="card-icon">&#127970;</div>
+        <h3>Tier 1 — Presentación</h3>
+        <p>Esta Vista Razor (.cshtml) representa el nivel de presentación. Recibe datos del Controlador y los renderiza sin conocer la fuente de datos.</p>
+    </div>
+    <div class="info-card card-green">
+        <div class="card-icon">&#9881;</div>
+        <h3>Tier 2 — Aplicación</h3>
+        <p>Los Controladores orquestan el flujo. HomeController maneja esta ruta (/Home) siguiendo la plantilla {controller=Home}/{action=Index}/{id?}.</p>
+    </div>
+    <div class="info-card card-gold">
+        <div class="card-icon">&#128452;</div>
+        <h3>Tier 3 — Datos</h3>
+        <p>El almacenamiento en memoria en EstudianteController simula el nivel de datos. En producción, este tier residiría en una red privada segmentada.</p>
+    </div>
+</div>
+
+<div class="route-demo">
+    <h2>Demostración de Enrutamiento Semántico</h2>
+    <table class="route-table">
+        <thead>
+            <tr>
+                <th>URL</th>
+                <th>Controlador</th>
+                <th>Acción</th>
+                <th>Parámetro id</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>/</code> o <code>/Home</code></td>
+                <td>HomeController</td>
+                <td>Index</td>
+                <td><em>Ninguno</em></td>
+            </tr>
+            <tr>
+                <td><code>/Estudiante/Listar</code></td>
+                <td>EstudianteController</td>
+                <td>Listar</td>
+                <td><em>Ninguno</em></td>
+            </tr>
+            <tr>
+                <td><code>/Estudiante/Historial/202505036</code></td>
+                <td>EstudianteController</td>
+                <td>Historial</td>
+                <td>202505036</td>
+            </tr>
+            <tr>
+                <td><code>/ControlAcademico/Login</code></td>
+                <td>ControlAcademicoController</td>
+                <td>Login</td>
+                <td><em>Ninguno</em></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,306 @@
+/* 
+   Archivo: wwwroot/css/site.css
+   Autor: Samuel Esteban Pichillá Duartes — Carné: 202505036
+   Curso: IPC2 Laboratorio A — USAC
+   
+   Estilos de la capa de presentación.
+   Colores institucionales USAC: Azul #003366, Verde #006633, Dorado #C8A400
+*/
+
+/* ── Variables de color institucional ── */
+:root {
+    --usac-blue:   #003366;
+    --usac-green:  #006633;
+    --usac-gold:   #C8A400;
+    --usac-light:  #E8EFF8;
+    --text-dark:   #1A1A2E;
+    --gray-light:  #F5F7FA;
+    --gray-med:    #DDE3EA;
+    --white:       #FFFFFF;
+    --radius:      8px;
+    --shadow:      0 2px 12px rgba(0,51,102,0.10);
+}
+
+/* ── Reset y base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--gray-light);
+    color: var(--text-dark);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ── Navbar ── */
+.navbar {
+    background: var(--usac-blue);
+    color: white;
+    padding: 0 2rem;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+.nav-brand { display: flex; align-items: center; gap: 10px; }
+.nav-logo { font-size: 1.4rem; }
+.nav-title { font-size: 1rem; font-weight: 600; letter-spacing: 0.02em; }
+.nav-links { list-style: none; display: flex; gap: 0; }
+.nav-links a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    padding: 0 1.2rem;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    transition: background 0.2s, color 0.2s;
+}
+.nav-links a:hover { background: rgba(255,255,255,0.12); color: white; }
+
+/* ── Main content ── */
+.main-content { flex: 1; padding: 2rem; max-width: 1100px; margin: 0 auto; width: 100%; }
+
+/* ── Hero section ── */
+.hero-section {
+    background: linear-gradient(135deg, var(--usac-blue) 0%, #005599 100%);
+    color: white;
+    padding: 3rem 2.5rem;
+    border-radius: var(--radius);
+    margin-bottom: 2rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+}
+.hero-badge {
+    display: inline-block;
+    background: var(--usac-gold);
+    color: var(--usac-blue);
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+.hero-title { font-size: 2rem; margin-bottom: 0.75rem; font-weight: 700; }
+.hero-subtitle { color: rgba(255,255,255,0.82); margin-bottom: 1.8rem; line-height: 1.6; }
+
+/* ── Info grid ── */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.2rem;
+    margin-bottom: 2rem;
+}
+.info-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    border-top: 4px solid var(--usac-blue);
+}
+.info-card.card-blue  { border-color: var(--usac-blue); }
+.info-card.card-green { border-color: var(--usac-green); }
+.info-card.card-gold  { border-color: var(--usac-gold); }
+.card-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+.info-card h3 { color: var(--usac-blue); margin-bottom: 0.5rem; font-size: 0.95rem; }
+.info-card p  { font-size: 0.88rem; line-height: 1.6; color: #444; }
+
+/* ── Route demo table ── */
+.route-demo {
+    background: white;
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    margin-bottom: 2rem;
+}
+.route-demo h2 { color: var(--usac-blue); margin-bottom: 1rem; font-size: 1.1rem; }
+
+/* ── Buttons ── */
+.btn-primary {
+    background: var(--usac-green);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.4rem;
+    border-radius: var(--radius);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s, transform 0.1s;
+}
+.btn-primary:hover { background: #005528; transform: translateY(-1px); }
+
+.btn-secondary {
+    background: white;
+    color: var(--usac-blue);
+    border: 2px solid var(--usac-blue);
+    padding: 0.55rem 1.3rem;
+    border-radius: var(--radius);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s;
+}
+.btn-secondary:hover { background: var(--usac-light); }
+.btn-link { color: var(--usac-blue); font-size: 0.88rem; text-decoration: none; font-weight: 600; }
+.btn-link:hover { text-decoration: underline; }
+
+/* ── Page header ── */
+.page-header {
+    background: white;
+    border-left: 5px solid var(--usac-blue);
+    padding: 1.2rem 1.5rem;
+    border-radius: 0 var(--radius) var(--radius) 0;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+}
+.page-header h1 { font-size: 1.4rem; color: var(--usac-blue); margin-bottom: 0.3rem; }
+.page-subtitle { font-size: 0.88rem; color: #666; }
+.page-subtitle code { background: var(--usac-light); padding: 1px 5px; border-radius: 4px; color: var(--usac-blue); }
+
+/* ── Toolbar ── */
+.toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+.record-count { font-size: 0.88rem; color: #666; }
+
+/* ── Form card ── */
+.form-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+    border-top: 3px solid var(--usac-gold);
+}
+.form-card h3 { color: var(--usac-blue); margin-bottom: 0.5rem; }
+.form-note { font-size: 0.83rem; color: #666; margin-bottom: 1rem; line-height: 1.5; background: var(--usac-light); padding: 8px 12px; border-radius: 4px; }
+.form-note code { font-family: 'Courier New', monospace; color: var(--usac-blue); }
+.form-row { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.8rem; }
+.form-row label { font-size: 0.88rem; font-weight: 600; color: var(--usac-blue); min-width: 160px; }
+.form-row input {
+    flex: 1;
+    border: 1.5px solid var(--gray-med);
+    border-radius: var(--radius);
+    padding: 0.45rem 0.8rem;
+    font-size: 0.9rem;
+    transition: border-color 0.2s;
+}
+.form-row input:focus { outline: none; border-color: var(--usac-blue); }
+.form-actions { display: flex; gap: 0.8rem; margin-top: 1rem; }
+.api-response { margin-top: 1rem; padding: 10px 14px; border-radius: var(--radius); font-size: 0.88rem; }
+.api-response.success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+.api-response.error   { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+
+/* ── Data table ── */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+.data-table th {
+    background: var(--usac-blue);
+    color: white;
+    padding: 0.85rem 1rem;
+    font-size: 0.88rem;
+    font-weight: 600;
+    text-align: left;
+}
+.data-table td { padding: 0.8rem 1rem; font-size: 0.9rem; border-bottom: 1px solid var(--gray-med); }
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:hover td { background: var(--usac-light); }
+
+.promedio-badge {
+    background: var(--usac-blue);
+    color: white;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.clasificacion {
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.82rem;
+    font-weight: 600;
+}
+.clasificacion.excelente    { background: #d4edda; color: #155724; }
+.clasificacion.satisfactorio{ background: #cce5ff; color: #004085; }
+.clasificacion.suficiente   { background: #fff3cd; color: #856404; }
+.clasificacion.insuficiente { background: #f8d7da; color: #721c24; }
+
+/* ── Route table (Home) ── */
+.route-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+.route-table th { background: var(--usac-light); color: var(--usac-blue); padding: 8px 12px; text-align: left; border-bottom: 2px solid var(--usac-blue); }
+.route-table td { padding: 8px 12px; border-bottom: 1px solid var(--gray-med); }
+.route-table tr:hover td { background: var(--gray-light); }
+.route-table code { background: var(--usac-light); padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', monospace; color: var(--usac-blue); }
+
+/* ── Detail card ── */
+.detail-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    margin-bottom: 1.5rem;
+}
+.detail-header { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--gray-med); }
+.avatar {
+    width: 72px; height: 72px;
+    background: var(--usac-blue);
+    color: white;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2rem; font-weight: 700;
+    flex-shrink: 0;
+}
+.detail-header h2 { color: var(--usac-blue); margin-bottom: 0.3rem; }
+.detail-header p  { color: #666; font-size: 0.9rem; }
+.detail-stats { display: flex; gap: 1.5rem; margin-bottom: 1.5rem; }
+.stat-box {
+    flex: 1;
+    background: var(--usac-light);
+    border-radius: var(--radius);
+    padding: 1.2rem;
+    text-align: center;
+}
+.stat-value { font-size: 2rem; font-weight: 700; color: var(--usac-blue); margin-bottom: 0.3rem; }
+.stat-label { font-size: 0.8rem; color: #666; text-transform: uppercase; letter-spacing: 0.05em; }
+.clasificacion-detail { font-size: 1.3rem !important; }
+.mvc-note { background: #fffbeb; border-left: 4px solid var(--usac-gold); padding: 12px 16px; border-radius: 0 var(--radius) var(--radius) 0; font-size: 0.88rem; line-height: 1.6; }
+.mvc-note code { background: var(--usac-light); padding: 2px 5px; border-radius: 3px; color: var(--usac-blue); }
+.back-nav { margin-top: 0.5rem; }
+
+/* ── Empty state ── */
+.empty-state { text-align: center; padding: 3rem; color: #888; background: white; border-radius: var(--radius); box-shadow: var(--shadow); }
+
+/* ── Footer ── */
+.footer {
+    background: var(--usac-blue);
+    color: rgba(255,255,255,0.75);
+    text-align: center;
+    padding: 1.2rem 2rem;
+    font-size: 0.82rem;
+    line-height: 1.8;
+    margin-top: auto;
+}
+.footer strong { color: white; }
+
+code { font-family: 'Courier New', monospace; }

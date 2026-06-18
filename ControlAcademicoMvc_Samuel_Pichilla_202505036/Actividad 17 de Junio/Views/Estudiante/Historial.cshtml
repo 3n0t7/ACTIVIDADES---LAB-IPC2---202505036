@@ -1,0 +1,54 @@
+@*
+    Archivo: Views/Estudiante/Historial.cshtml
+    Vista de historial individual — Ruta: GET /Estudiante/Historial/{id}
+    
+    Demuestra enrutamiento con parámetro id en la plantilla {controller}/{action}/{id?}.
+    El Model está fuertemente tipado como Estudiante (no como object ni dynamic).
+*@
+@model ControlAcademicoMvc.Models.Estudiante
+@{
+    ViewData["Title"] = $"Historial — {Model.Nombre}";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">
+    <h1>&#128100; Historial Académico</h1>
+    <p class="page-subtitle">
+        Ruta activa: <code>/Estudiante/Historial/@Model.Carne</code> →
+        <strong>EstudianteController.Historial(@Model.Carne)</strong>
+    </p>
+</div>
+
+<div class="detail-card">
+    <div class="detail-header">
+        <div class="avatar">@Model.Nombre[0]</div>
+        <div>
+            <h2>@Model.Nombre</h2>
+            <p>Carné: <strong>@Model.Carne</strong></p>
+        </div>
+    </div>
+
+    <div class="detail-stats">
+        <div class="stat-box">
+            <div class="stat-value">@Model.Promedio.ToString("F1")</div>
+            <div class="stat-label">Promedio Acumulado</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-value clasificacion-detail @Model.ClasificacionAcademica.ToLower()">
+                @Model.ClasificacionAcademica
+            </div>
+            <div class="stat-label">Clasificación Académica</div>
+        </div>
+    </div>
+
+    <div class="mvc-note">
+        <strong>Nota de Diseño MVC:</strong> La propiedad <code>ClasificacionAcademica</code>
+        fue calculada en el <strong>Modelo</strong> (capa de dominio), no aquí en la Vista.
+        La Vista solo recibe el valor calculado y lo muestra. Esto cumple el principio
+        de que la Vista es una entidad pasiva que no contiene lógica de negocio.
+    </div>
+</div>
+
+<div class="back-nav">
+    <a href="/Estudiante/Listar" class="btn-secondary">&#8592; Volver al Listado</a>
+</div>

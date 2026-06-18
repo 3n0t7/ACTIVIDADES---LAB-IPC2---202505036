@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <!-- Autor: Samuel Esteban Pichillá Duartes — Carné: 202505036 -->
+    <!-- Curso: IPC2 Laboratorio A — USAC -->
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>ControlAcademicoMvc</RootNamespace>
+    <AssemblyName>ControlAcademicoMvc</AssemblyName>
+  </PropertyGroup>
+
+</Project>

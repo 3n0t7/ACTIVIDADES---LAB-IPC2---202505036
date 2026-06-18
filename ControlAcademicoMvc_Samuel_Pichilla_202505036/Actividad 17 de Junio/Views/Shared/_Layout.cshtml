@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!--
+    Archivo: Views/Shared/_Layout.cshtml
+    Autor: Samuel Esteban Pichillá Duartes — Carné: 202505036
+    Curso: IPC2 Laboratorio A — USAC
+    
+    Layout maestro de la aplicación. Todas las vistas lo heredan.
+    Demuestra el principio de DRY (Don't Repeat Yourself) en la capa de presentación.
+-->
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] — Control Académico USAC</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+
+    <!-- ── Barra de Navegación ── -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <span class="nav-logo">&#127979;</span>
+            <span class="nav-title">Control Académico — IPC2</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/">Inicio</a></li>
+            <li><a href="/Estudiante/Listar">Estudiantes</a></li>
+        </ul>
+    </nav>
+
+    <!-- ── Contenido Principal (inyectado por cada Vista) ── -->
+    <main class="main-content">
+        @RenderBody()
+    </main>
+
+    <!-- ── Pie de Página ── -->
+    <footer class="footer">
+        <div>
+            <strong>Universidad de San Carlos de Guatemala</strong> — Facultad de Ingeniería
+        </div>
+        <div>
+            Introducción a la Programación y Computación 2 | Laboratorio A |
+            Samuel Esteban Pichillá Duartes — 202505036
+        </div>
+    </footer>
+
+</body>
+</html>
